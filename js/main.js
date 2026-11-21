@@ -162,21 +162,17 @@
   var dateInput = document.getElementById("datum");
   dateInput.min = new Date().toISOString().split("T")[0];
 
-  var BOOKING_EMAIL = "charlotte.neuville2004@gmail.com";
+  var PHONE_INTL = "32477501989"; // 0477 50 19 89
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
+    var via = (e.submitter && e.submitter.value) || "whatsapp";
     var ok = true;
     form.querySelectorAll("[required]").forEach(function (el) {
       var valid = el.value.trim() !== "";
       el.closest(".field").classList.toggle("invalid", !valid);
       if (!valid) ok = false;
     });
-    var email = document.getElementById("email");
-    if (email.value && !email.checkValidity()) {
-      email.closest(".field").classList.add("invalid");
-      ok = false;
-    }
     if (!ok) {
       status.className = "form-status error";
       status.textContent = "Vul de aangeduide velden nog in.";
@@ -186,23 +182,34 @@
     }
 
     var d = new FormData(form);
-    var body = [
-      "Naam: " + d.get("naam"),
-      "Telefoon: " + d.get("telefoon"),
-      "E-mail: " + (d.get("email") || "-"),
-      "Behandeling: " + d.get("behandeling"),
-      "Voorkeursdatum: " + (d.get("datum") || "geen voorkeur"),
-      "Voorkeursmoment: " + d.get("moment"),
+    var datum = d.get("datum");
+    if (datum) {
+      var parts = datum.split("-");
+      var dt = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+      datum = dt.toLocaleDateString("nl-BE", { weekday: "long", day: "numeric", month: "long" });
+    }
+    var lines = [
+      "Hallo! Ik wil graag een afspraak maken.",
       "",
-      d.get("bericht") || ""
-    ].join("\n");
+      "Naam: " + d.get("naam"),
+      "Behandeling: " + d.get("behandeling"),
+      "Voorkeursdatum: " + (datum || "geen voorkeur"),
+      "Voorkeursmoment: " + d.get("moment")
+    ];
+    if (d.get("telefoon")) lines.push("Telefoon: " + d.get("telefoon"));
+    if (d.get("bericht")) lines.push("", d.get("bericht"));
+    var text = encodeURIComponent(lines.join("\n"));
 
-    window.location.href = "mailto:" + BOOKING_EMAIL +
-      "?subject=" + encodeURIComponent("Afspraakaanvraag – " + d.get("behandeling")) +
-      "&body=" + encodeURIComponent(body);
-
-    status.className = "form-status ok";
-    status.textContent = "Bedankt! Je e-mailprogramma opent met je aanvraag. Verstuur die mail en we nemen snel contact op.";
+    if (via === "sms") {
+      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      window.location.href = "sms:+" + PHONE_INTL + (isIOS ? "&" : "?") + "body=" + text;
+      status.className = "form-status ok";
+      status.textContent = "Je berichten-app opent met je aanvraag. Druk op versturen en we laten je snel iets weten.";
+    } else {
+      window.location.href = "https://wa.me/" + PHONE_INTL + "?text=" + text;
+      status.className = "form-status ok";
+      status.textContent = "WhatsApp opent met je aanvraag. Druk op versturen en we laten je snel iets weten.";
+    }
   });
 
   form.addEventListener("input", function (e) {

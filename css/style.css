@@ -81,6 +81,9 @@ strong { font-weight: 500; }
 .btn-light { background: #fff; color: var(--rose-600); }
 .btn-light:hover { background: var(--blush-100); }
 .btn-block { width: 100%; }
+.btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex: 0 0 auto; }
+.form-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-actions .btn { white-space: normal; padding-left: 1em; padding-right: 1em; }
 
 .text-link { display: inline-flex; gap: .5em; color: var(--rose-600); font-weight: 400; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
 .text-link span { transition: transform .25s; }
@@ -247,7 +250,7 @@ strong { font-weight: 500; }
 /* ---------- Galerij ---------- */
 .gallery-section { background: var(--white); }
 .gallery {
-  display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 240px; gap: 18px;
+  display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 210px; gap: 16px; grid-auto-flow: dense;
 }
 .gallery-item {
   position: relative; padding: 0; border: 0; border-radius: var(--radius); overflow: hidden; background: var(--blush-100);
@@ -261,9 +264,6 @@ strong { font-weight: 500; }
 }
 .gallery-item:hover img { transform: scale(1.06); }
 .gallery-item:hover::after { opacity: 1; }
-.gallery .gallery-item:nth-child(1) { grid-column: 1; }
-.gallery .gallery-item:nth-child(4) { grid-column: 4; grid-row: 1 / span 2; }
-.gallery .gallery-item:nth-child(5) { grid-column: 2 / span 2; }
 
 /* ---------- Veelgestelde vragen ---------- */
 .faq { background: var(--blush-50); }
@@ -329,6 +329,7 @@ strong { font-weight: 500; }
   display: grid; gap: 18px;
 }
 .field { display: grid; gap: 6px; min-width: 0; }
+.field input[type="date"] { min-width: 0; min-height: 3.1em; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .field label { font-size: .85rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); font-weight: 400; }
 .optional { text-transform: none; letter-spacing: 0; color: var(--sage-600); }
@@ -496,13 +497,8 @@ strong { font-weight: 500; }
   .price-list .price { font-size: 1.15rem; }
 
   /* Galerij: zelfde mozaïek als op de computer, in 3 kolommen */
-  .gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 120px; gap: 8px; }
+  .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 130px; gap: 8px; }
   .gallery-item { border-radius: 12px; }
-  .gallery .gallery-item:nth-child(1) { grid-column: 1; grid-row: 1 / span 2; }
-  .gallery .gallery-item:nth-child(2) { grid-column: 2; grid-row: 1; }
-  .gallery .gallery-item:nth-child(3) { grid-column: 3; grid-row: 1; }
-  .gallery .gallery-item:nth-child(4) { grid-column: 2 / span 2; grid-row: 2; }
-  .gallery .gallery-item:nth-child(5) { grid-column: 1 / span 3; grid-row: 3; }
   .gallery-item::after { display: none; }
 
   /* Reviews en FAQ */
@@ -518,7 +514,9 @@ strong { font-weight: 500; }
   .booking-contact { flex-direction: row; flex-wrap: wrap; }
   .contact-pill { font-size: .9rem; }
   .booking-form { gap: 14px; }
-  .field-row { gap: 12px; }
+  .field-row { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .form-actions { grid-template-columns: minmax(0, 1fr); }
+  .form-actions .btn { white-space: nowrap; }
   .map-wrap { aspect-ratio: 4 / 3; }
 }
 
@@ -531,6 +529,7 @@ strong { font-weight: 500; }
   .menu-toggle { flex: 0 0 auto; }
   .hero-actions { flex-direction: column; }
   .field-row { grid-template-columns: 1fr; }
+  .form-actions { grid-template-columns: 1fr; }
   .treatment-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
