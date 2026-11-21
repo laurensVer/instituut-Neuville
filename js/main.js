@@ -179,7 +179,7 @@
     }
     if (!ok) {
       status.className = "form-status error";
-      status.textContent = "Vul de aangeduide velden in, aub.";
+      status.textContent = "Vul de aangeduide velden nog in.";
       var first = form.querySelector(".invalid input, .invalid select");
       if (first) first.focus();
       return;

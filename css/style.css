@@ -17,8 +17,9 @@
   --white: #ffffff;
   --cream: #fffaf8;
 
-  --font-serif: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Playfair Display", "Didot", Georgia, serif;
+  --font-script: "Great Vibes", "Snell Roundhand", "Segoe Script", cursive;
+  --font-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --radius: 18px;
   --radius-lg: 28px;
@@ -36,8 +37,8 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   font-weight: 300;
-  font-size: 1.0625rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.8;
   color: var(--ink);
   background: var(--cream);
   overflow-x: hidden;
@@ -46,8 +47,8 @@ img { max-width: 100%; display: block; height: auto; }
 a { color: inherit; }
 ul { margin: 0; padding: 0; list-style: none; }
 button { font: inherit; color: inherit; cursor: pointer; }
-h1, h2, h3 { font-family: var(--font-serif); font-weight: 500; line-height: 1.15; margin: 0 0 .5em; color: var(--ink); }
-h1 em, h2 em { font-style: italic; color: var(--rose-500); font-weight: 500; }
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; line-height: 1.2; margin: 0 0 .5em; color: var(--ink); text-wrap: balance; }
+h1 em, h2 em { font-family: var(--font-script); font-style: normal; font-weight: 400; font-size: 1.3em; line-height: .9; color: var(--rose-500); letter-spacing: 0; }
 p { margin: 0 0 1em; }
 strong { font-weight: 500; }
 
@@ -100,8 +101,8 @@ strong { font-weight: 500; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand img { height: 58px; width: auto; }
 .brand-text { display: flex; flex-direction: column; line-height: 1; }
-.brand-name { font-family: var(--font-serif); font-style: italic; font-size: 1.65rem; font-weight: 500; color: var(--ink); }
-.brand-tag { font-size: .62rem; letter-spacing: .32em; text-transform: uppercase; color: var(--sage-600); margin-top: 6px; }
+.brand-name { font-family: var(--font-script); font-size: 2.05rem; font-weight: 400; color: var(--ink); line-height: .9; }
+.brand-tag { font-size: .58rem; letter-spacing: .34em; text-transform: uppercase; color: var(--sage-600); margin-top: 4px; padding-left: 2px; }
 
 .main-nav { display: flex; align-items: center; gap: 36px; }
 .main-nav ul { display: flex; gap: 30px; }
@@ -133,7 +134,7 @@ strong { font-weight: 500; }
   overflow: hidden;
 }
 .hero-inner { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
-.hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); font-weight: 400; letter-spacing: -.01em; }
+.hero h1 { font-size: clamp(2.4rem, 5.2vw, 4.1rem); font-weight: 400; letter-spacing: -.01em; line-height: 1.15; }
 .lead { font-size: clamp(1.05rem, 1.4vw, 1.2rem); color: var(--ink-soft); max-width: 34em; margin-bottom: 2rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 2.6rem; }
 .hero-badges { display: flex; flex-wrap: wrap; gap: 12px 28px; font-size: .92rem; color: var(--ink-soft); }
@@ -165,7 +166,7 @@ strong { font-weight: 500; }
 .section-head { text-align: center; max-width: 640px; margin: 0 auto clamp(40px, 6vw, 64px); }
 .section-head .eyebrow::after { content: ""; width: 28px; height: 1px; background: currentColor; }
 .section-head p:not(.eyebrow) { color: var(--ink-soft); }
-.section h2 { font-size: clamp(2.1rem, 4.4vw, 3.3rem); font-weight: 400; }
+.section h2 { font-size: clamp(1.9rem, 3.8vw, 2.9rem); font-weight: 400; }
 
 /* ---------- Over ons ---------- */
 .about { background: var(--white); }
@@ -200,13 +201,13 @@ strong { font-weight: 500; }
 }
 .treatment-card:hover .treatment-icon { background: var(--blush-200); }
 .treatment-icon svg { width: 32px; height: 32px; fill: none; stroke: var(--rose-500); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.treatment-card h3 { font-size: 1.5rem; margin-bottom: .35em; }
+.treatment-card h3 { font-size: 1.3rem; margin-bottom: .4em; }
 .treatment-card p { font-size: .95rem; color: var(--ink-soft); flex: 1; }
 .treatment-price { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; color: var(--rose-600); font-weight: 400; }
 .treatment-card-cta {
   background: linear-gradient(150deg, var(--rose-500), #c97a8c); border: 0; color: #fff; justify-content: center;
 }
-.treatment-card-cta h3 { color: #fff; font-size: 1.8rem; }
+.treatment-card-cta h3 { color: #fff; font-family: var(--font-script); font-size: 2.3rem; line-height: 1; }
 .treatment-card-cta p { color: rgba(255, 255, 255, .9); flex: 0 0 auto; margin-bottom: 1.4rem; }
 .treatment-card-cta:hover { transform: none; }
 
@@ -229,7 +230,7 @@ strong { font-weight: 500; }
   border-radius: var(--radius-lg); padding: clamp(28px, 5vw, 56px);
   border: 1px solid var(--line);
 }
-.price-panel h3 { font-size: 2rem; text-align: center; margin-bottom: 1.2rem; font-weight: 400; }
+.price-panel h3 { font-size: 1.75rem; text-align: center; margin-bottom: 1.2rem; font-weight: 400; }
 .price-panel:not([hidden]) { animation: fade .45s ease; }
 @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .price-list li {
@@ -239,7 +240,7 @@ strong { font-weight: 500; }
 .price-list li:last-child { border-bottom: 0; }
 .price-list li > span:first-child { flex: 1; }
 .price-list small { display: block; font-size: .85rem; color: var(--sage-600); }
-.price-list .price { font-family: var(--font-serif); font-size: 1.45rem; font-weight: 600; color: var(--rose-600); white-space: nowrap; }
+.price-list .price { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500; color: var(--rose-600); white-space: nowrap; }
 .price-list .extra { color: var(--ink-soft); font-style: italic; }
 .price-note { text-align: center; font-size: .88rem; color: var(--sage-600); margin: 1.8rem 0 0; }
 
@@ -277,7 +278,7 @@ strong { font-weight: 500; }
 .faq-list details[open] { border-color: var(--blush-300); box-shadow: var(--shadow-sm); }
 .faq-list summary {
   list-style: none; cursor: pointer; position: relative;
-  padding: 20px 60px 20px 24px; font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; line-height: 1.3;
+  padding: 20px 60px 20px 24px; font-family: var(--font-serif); font-size: 1.12rem; font-weight: 400; line-height: 1.4;
 }
 .faq-list summary::-webkit-details-marker { display: none; }
 .faq-list summary::after {
@@ -298,7 +299,7 @@ strong { font-weight: 500; }
 }
 .review-stars { font-size: 1.6rem; letter-spacing: .12em; color: #d9a23f; white-space: nowrap; }
 .review-text { flex: 1; }
-.review-text h3 { font-size: 1.6rem; margin-bottom: .2em; }
+.review-text h3 { font-size: 1.45rem; margin-bottom: .2em; }
 .review-text p { margin: 0; color: var(--ink-soft); }
 
 /* ---------- Afspraak ---------- */
@@ -421,7 +422,7 @@ strong { font-weight: 500; }
 @media (max-width: 920px) {
   :root { --header-h: 72px; }
   .brand img { height: 46px; }
-  .brand-name { font-size: 1.4rem; }
+  .brand-name { font-size: 1.75rem; }
 
   .menu-toggle { display: block; z-index: 2; }
   .main-nav {
@@ -434,7 +435,7 @@ strong { font-weight: 500; }
   }
   .main-nav.open { transform: none; opacity: 1; visibility: visible; }
   .main-nav ul { flex-direction: column; gap: 0; }
-  .main-nav ul a { display: block; padding: 14px 0; font-family: var(--font-serif); font-size: 1.5rem; border-bottom: 1px solid var(--line); }
+  .main-nav ul a { display: block; padding: 14px 0; font-family: var(--font-serif); font-size: 1.3rem; border-bottom: 1px solid var(--line); }
   .main-nav ul a::after { display: none; }
 
   .treatment-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -452,10 +453,11 @@ strong { font-weight: 500; }
   /* Hero: tekst links zoals op de computer, foto's eronder */
   .hero { padding: calc(var(--header-h) + 36px) 0 56px; }
   .hero-inner { grid-template-columns: 1fr; gap: 36px; }
-  .hero h1 { font-size: clamp(2.4rem, 10vw, 3.4rem); }
+  .hero h1 { font-size: clamp(2.1rem, 8.6vw, 3rem); }
   .lead { margin-bottom: 1.6rem; }
   .hero-actions { gap: 10px; margin-bottom: 1.8rem; }
-  .hero-actions .btn { flex: 1 1 0; padding: .9em 1em; }
+  .hero-actions { flex-wrap: nowrap; }
+  .hero-actions .btn { flex: 1 1 0; min-width: 0; padding: .95em .5em; font-size: .84rem; letter-spacing: .01em; }
   .hero-badges { gap: 8px 18px; font-size: .85rem; }
   .hero-visual { justify-self: center; max-width: 400px; aspect-ratio: 1 / .9; }
   .hero-photo-main { height: 92%; }
@@ -471,11 +473,11 @@ strong { font-weight: 500; }
   .treatment-card { padding: 18px 16px; border-radius: 16px; }
   .treatment-icon { width: 46px; height: 46px; margin-bottom: 12px; }
   .treatment-icon svg { width: 26px; height: 26px; }
-  .treatment-card h3 { font-size: 1.22rem; }
+  .treatment-card h3 { font-size: 1.08rem; }
   .treatment-card p { font-size: .84rem; line-height: 1.5; margin-bottom: .8em; }
   .treatment-price { font-size: .72rem; letter-spacing: .1em; }
   .treatment-card-cta { grid-column: auto; }
-  .treatment-card-cta h3 { font-size: 1.35rem; }
+  .treatment-card-cta h3 { font-size: 1.9rem; }
   .treatment-card-cta p { margin-bottom: .9rem; }
   .treatment-card-cta .btn { padding: .7em 1.1em; font-size: .85rem; }
 
@@ -489,9 +491,9 @@ strong { font-weight: 500; }
   .price-tabs::-webkit-scrollbar { display: none; }
   .price-tabs button { flex: 0 0 auto; scroll-snap-align: start; }
   .price-card { padding: 24px 20px; }
-  .price-panel h3 { font-size: 1.7rem; }
+  .price-panel h3 { font-size: 1.5rem; }
   .price-list li { padding: 12px 0; }
-  .price-list .price { font-size: 1.3rem; }
+  .price-list .price { font-size: 1.15rem; }
 
   /* Galerij: zelfde mozaïek als op de computer, in 3 kolommen */
   .gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 120px; gap: 8px; }
@@ -507,7 +509,7 @@ strong { font-weight: 500; }
   .review-band { flex-direction: column; text-align: center; gap: 14px; }
   .faq-inner { grid-template-columns: 1fr; gap: 28px; }
   .faq-head { position: static; text-align: left; }
-  .faq-list summary { font-size: 1.12rem; padding: 16px 54px 16px 18px; }
+  .faq-list summary { font-size: 1rem; padding: 16px 54px 16px 18px; }
   .faq-list summary::after { right: 14px; }
   .faq-list details p { padding: 0 18px 18px; font-size: .95rem; }
 
