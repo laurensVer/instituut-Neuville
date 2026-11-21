@@ -244,7 +244,7 @@ strong { font-weight: 500; }
 .price-note { text-align: center; font-size: .88rem; color: var(--sage-600); margin: 1.8rem 0 0; }
 
 /* ---------- Galerij ---------- */
-.gallery-section { background: var(--blush-50); }
+.gallery-section { background: var(--white); }
 .gallery {
   display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 240px; gap: 18px;
 }
@@ -263,6 +263,43 @@ strong { font-weight: 500; }
 .gallery .gallery-item:nth-child(1) { grid-column: 1; }
 .gallery .gallery-item:nth-child(4) { grid-column: 4; grid-row: 1 / span 2; }
 .gallery .gallery-item:nth-child(5) { grid-column: 2 / span 2; }
+
+/* ---------- Veelgestelde vragen ---------- */
+.faq { background: var(--blush-50); }
+.faq-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: clamp(32px, 6vw, 90px); align-items: start; }
+.faq-head { position: sticky; top: calc(var(--header-h) + 32px); }
+.faq-head p:not(.eyebrow) { color: var(--ink-soft); }
+.faq-list { display: grid; gap: 12px; }
+.faq-list details {
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+  transition: border-color .25s, box-shadow .25s;
+}
+.faq-list details[open] { border-color: var(--blush-300); box-shadow: var(--shadow-sm); }
+.faq-list summary {
+  list-style: none; cursor: pointer; position: relative;
+  padding: 20px 60px 20px 24px; font-family: var(--font-serif); font-size: 1.3rem; font-weight: 500; line-height: 1.3;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+  content: ""; position: absolute; right: 20px; top: 50%; width: 28px; height: 28px; margin-top: -14px; border-radius: 50%;
+  background: var(--blush-100) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b85a70' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center / 60% no-repeat;
+  transition: transform .3s, background-color .3s;
+}
+.faq-list details[open] summary::after { transform: rotate(45deg); background-color: var(--blush-200); }
+.faq-list summary:hover { color: var(--rose-600); }
+.faq-list details p { padding: 0 24px 22px; margin: 0; color: var(--ink-soft); }
+.faq-list details[open] p { animation: fade .35s ease; }
+
+/* ---------- Review-blok ---------- */
+.review-band {
+  margin-top: clamp(40px, 6vw, 64px); display: flex; align-items: center; gap: 28px;
+  background: var(--blush-50); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: clamp(24px, 4vw, 36px) clamp(24px, 4vw, 44px);
+}
+.review-stars { font-size: 1.6rem; letter-spacing: .12em; color: #d9a23f; white-space: nowrap; }
+.review-text { flex: 1; }
+.review-text h3 { font-size: 1.6rem; margin-bottom: .2em; }
+.review-text p { margin: 0; color: var(--ink-soft); }
 
 /* ---------- Afspraak ---------- */
 .booking {
@@ -376,7 +413,8 @@ strong { font-weight: 500; }
    Responsief
    ========================================================== */
 @media (max-width: 1080px) {
-  .treatment-grid { grid-template-columns: repeat(2, 1fr); }
+  .treatment-grid { gap: 16px; }
+  .treatment-card { padding: 26px 20px 22px; }
   .main-nav ul { gap: 22px; }
 }
 
@@ -399,42 +437,93 @@ strong { font-weight: 500; }
   .main-nav ul a { display: block; padding: 14px 0; font-family: var(--font-serif); font-size: 1.5rem; border-bottom: 1px solid var(--line); }
   .main-nav ul a::after { display: none; }
 
-  .hero-inner, .about-inner, .booking-inner, .contact-inner { grid-template-columns: 1fr; }
-  .hero-text { text-align: center; }
-  .hero .eyebrow, .hero-actions, .hero-badges { justify-content: center; }
-  .lead { margin-left: auto; margin-right: auto; }
-  .hero-visual { justify-self: center; max-width: 460px; }
-
-  .about-photo { max-width: 520px; margin: 0 auto; }
-
-  .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
-  .gallery .gallery-item:nth-child(n) { grid-column: auto; grid-row: auto; }
-  .gallery .gallery-item-tall { grid-row: span 2; }
-
+  .treatment-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .treatment-card-cta { grid-column: span 2; }
   .mobile-cta { display: block; }
+  .site-footer { padding-bottom: 110px; }
 }
 
-@media (max-width: 600px) {
+/* Tablet staand en gsm: zelfde opbouw als op de computer, maar compacter */
+@media (max-width: 760px) {
   body { font-size: 1rem; }
-  .hero { padding-top: calc(var(--header-h) + 32px); }
-  .hero-actions .btn { flex: 1 1 100%; }
-  .hero-badges { flex-direction: column; align-items: center; gap: 10px; }
-  .treatment-grid { grid-template-columns: 1fr; gap: 16px; }
-  .treatment-card { padding: 24px 22px; }
-  .field-row { grid-template-columns: 1fr; }
+  .section { padding: 64px 0; }
+  .section-head { margin-bottom: 32px; }
 
+  /* Hero: tekst links zoals op de computer, foto's eronder */
+  .hero { padding: calc(var(--header-h) + 36px) 0 56px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+  .hero h1 { font-size: clamp(2.4rem, 10vw, 3.4rem); }
+  .lead { margin-bottom: 1.6rem; }
+  .hero-actions { gap: 10px; margin-bottom: 1.8rem; }
+  .hero-actions .btn { flex: 1 1 0; padding: .9em 1em; }
+  .hero-badges { gap: 8px 18px; font-size: .85rem; }
+  .hero-visual { justify-self: center; max-width: 400px; aspect-ratio: 1 / .9; }
+  .hero-photo-main { height: 92%; }
+
+  /* Over ons: foto en tekst naast elkaar blijft te krap, dus foto als brede banner */
+  .about-inner { grid-template-columns: 1fr; gap: 32px; }
+  .about-photo img { aspect-ratio: 16 / 11; }
+  .about-photo::before { display: none; }
+  .checklist { margin: 1.2rem 0 1.6rem; }
+
+  /* Behandelingen: 2 kaartjes naast elkaar */
+  .treatment-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .treatment-card { padding: 18px 16px; border-radius: 16px; }
+  .treatment-icon { width: 46px; height: 46px; margin-bottom: 12px; }
+  .treatment-icon svg { width: 26px; height: 26px; }
+  .treatment-card h3 { font-size: 1.22rem; }
+  .treatment-card p { font-size: .84rem; line-height: 1.5; margin-bottom: .8em; }
+  .treatment-price { font-size: .72rem; letter-spacing: .1em; }
+  .treatment-card-cta { grid-column: auto; }
+  .treatment-card-cta h3 { font-size: 1.35rem; }
+  .treatment-card-cta p { margin-bottom: .9rem; }
+  .treatment-card-cta .btn { padding: .7em 1.1em; font-size: .85rem; }
+
+  /* Prijzen */
   .price-tabs {
     flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto;
     margin-left: calc(var(--gutter) * -1); margin-right: calc(var(--gutter) * -1);
     padding: 4px var(--gutter) 10px; scrollbar-width: none; scroll-snap-type: x proximity;
+    margin-bottom: 20px;
   }
   .price-tabs::-webkit-scrollbar { display: none; }
   .price-tabs button { flex: 0 0 auto; scroll-snap-align: start; }
   .price-card { padding: 24px 20px; }
+  .price-panel h3 { font-size: 1.7rem; }
+  .price-list li { padding: 12px 0; }
   .price-list .price { font-size: 1.3rem; }
 
-  .gallery { grid-auto-rows: 160px; gap: 12px; }
-  .map-wrap { aspect-ratio: 1 / 1; }
+  /* Galerij: zelfde mozaïek als op de computer, in 3 kolommen */
+  .gallery { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 120px; gap: 8px; }
+  .gallery-item { border-radius: 12px; }
+  .gallery .gallery-item:nth-child(1) { grid-column: 1; grid-row: 1 / span 2; }
+  .gallery .gallery-item:nth-child(2) { grid-column: 2; grid-row: 1; }
+  .gallery .gallery-item:nth-child(3) { grid-column: 3; grid-row: 1; }
+  .gallery .gallery-item:nth-child(4) { grid-column: 2 / span 2; grid-row: 2; }
+  .gallery .gallery-item:nth-child(5) { grid-column: 1 / span 3; grid-row: 3; }
+  .gallery-item::after { display: none; }
+
+  /* Reviews en FAQ */
+  .review-band { flex-direction: column; text-align: center; gap: 14px; }
+  .faq-inner { grid-template-columns: 1fr; gap: 28px; }
+  .faq-head { position: static; text-align: left; }
+  .faq-list summary { font-size: 1.12rem; padding: 16px 54px 16px 18px; }
+  .faq-list summary::after { right: 14px; }
+  .faq-list details p { padding: 0 18px 18px; font-size: .95rem; }
+
+  /* Afspraak en contact */
+  .booking-inner, .contact-inner { grid-template-columns: 1fr; gap: 32px; }
+  .booking-contact { flex-direction: row; flex-wrap: wrap; }
+  .contact-pill { font-size: .9rem; }
+  .booking-form { gap: 14px; }
+  .field-row { gap: 12px; }
+  .map-wrap { aspect-ratio: 4 / 3; }
+}
+
+@media (max-width: 380px) {
+  .hero-actions { flex-direction: column; }
+  .field-row { grid-template-columns: 1fr; }
+  .treatment-card p { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
