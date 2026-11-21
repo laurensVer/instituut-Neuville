@@ -162,7 +162,7 @@
   var dateInput = document.getElementById("datum");
   dateInput.min = new Date().toISOString().split("T")[0];
 
-  var BOOKING_EMAIL = "info@neuville.com";
+  var BOOKING_EMAIL = "charlotte.neuville2004@gmail.com";
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
