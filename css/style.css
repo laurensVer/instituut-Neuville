@@ -350,6 +350,8 @@ strong { font-weight: 500; }
 .field.invalid input, .field.invalid select { border-color: #c0392b; }
 .form-status { margin: 0; font-size: .95rem; text-align: center; min-height: 1.4em; }
 .form-status.ok { color: var(--sage-600); }
+.form-status.ok { display: grid; justify-items: center; gap: 10px; padding: 16px; border-radius: 14px; background: var(--blush-50); border: 1px solid var(--line); color: var(--ink); }
+.form-status small { color: var(--ink-soft); font-size: .82rem; }
 .form-status.error { color: #b03a2e; }
 
 /* ---------- Contact ---------- */

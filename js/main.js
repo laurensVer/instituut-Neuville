@@ -163,6 +163,7 @@
   dateInput.min = new Date().toISOString().split("T")[0];
 
   var PHONE_INTL = "32477501989"; // 0477 50 19 89
+  var AUTO_OPEN = true; // WhatsApp of berichten meteen openen na versturen
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -200,16 +201,35 @@
     if (d.get("bericht")) lines.push("", d.get("bericht"));
     var text = encodeURIComponent(lines.join("\n"));
 
+    var url, label, msg;
     if (via === "sms") {
       var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-      window.location.href = "sms:+" + PHONE_INTL + (isIOS ? "&" : "?") + "body=" + text;
-      status.className = "form-status ok";
-      status.textContent = "Je berichten-app opent met je aanvraag. Druk op versturen en we laten je snel iets weten.";
+      url = "sms:+" + PHONE_INTL + (isIOS ? "&" : "?") + "body=" + text;
+      label = "Open berichten";
+      msg = "Je aanvraag staat klaar in je berichten-app. Druk daar op versturen en we laten je snel iets weten.";
     } else {
-      window.location.href = "https://wa.me/" + PHONE_INTL + "?text=" + text;
-      status.className = "form-status ok";
-      status.textContent = "WhatsApp opent met je aanvraag. Druk op versturen en we laten je snel iets weten.";
+      url = "https://wa.me/" + PHONE_INTL + "?text=" + text;
+      label = "Open WhatsApp";
+      msg = "Je aanvraag staat klaar in WhatsApp. Druk daar op versturen en we laten je snel iets weten.";
     }
+
+    // Toon altijd ook een knop, voor als het automatisch openen niet lukt
+    status.className = "form-status ok";
+    status.textContent = "";
+    var p = document.createElement("span");
+    p.textContent = msg;
+    var link = document.createElement("a");
+    link.href = url;
+    link.className = "btn btn-primary status-link";
+    link.textContent = label;
+    if (via !== "sms") { link.target = "_blank"; link.rel = "noopener"; }
+    var hint = document.createElement("small");
+    hint.textContent = "Opent er niets? Tik dan op de knop.";
+    status.appendChild(p);
+    status.appendChild(link);
+    status.appendChild(hint);
+
+    if (AUTO_OPEN) window.location.href = url;
   });
 
   form.addEventListener("input", function (e) {
